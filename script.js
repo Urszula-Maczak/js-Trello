@@ -10,7 +10,7 @@ $(function() {
 	}
 
 	//KLASA COLUMN
-	function column(name) {
+	function Column(name) {
 		var self = this; 
 
 		this.id = randomString();
@@ -26,19 +26,18 @@ $(function() {
 				$columnDelete = $('<button>').addClass('btn-delete').text('x'),
 				$columnAddCard = $('<button>').addClass('add-card').text('Dodaj kartę');
 
+			// PODPINANIE ODPOWIEDNICH ZDARZEŃ
 			$columnDelete.click(function() {      
 				self.removeColumn();
 			});
-
-			// PODPINANIE ODPOWIEDNICH ZDARZEŃ
 			$columnAddCard.click(function() {
 				self.addCard(new Card(prompt("Wpisz nazwę karty")));
 			});
 
 			// KONSTRUOWANIE KOLUMNY
 			$column.append($columnTitle)
-					.append($columnDelete)
-					.append($columnAddCard)			
+					.append($columnAddCard)	
+					.append($columnDelete)		
 					.append($columnCardList);
 
 			return $column;	   // ZWRACANIE STWORZONEJ  KOLUMNY
@@ -93,7 +92,7 @@ $(function() {
 	function initSortable() {
 		$('.column-container').sortable({
 			connectWith: '.column-card-list',
-			placeholder: 'card-placeholder'
+			placeholder: '.card-placeholder'
 		}).disableSelection();
 	}
 
@@ -127,10 +126,12 @@ $(function() {
 
 // TWORZENIE NOWYCH EGZEMPLARZY KART
 	var card1 = new Card('Nowe zadanie');
-	var card2 = new Card('Stworzyc tablice kanban');
+	var card2 = new Card('Nowe zadanie');
+	var card3 = new Card('Nowe zadanie');
 
 // DODAWANIE KART DO KOLUMN
 	todoColumn.addCard(card1);
 	doingColumn.addCard(card2);
+	doneColumn.addCard(card3);
 
 })	
