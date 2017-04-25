@@ -25,13 +25,18 @@ $(function() {
 				$columnCardList = $('<ul>').addClass('column-card-list'),
 				$columnDelete = $('<button>').addClass('btn-delete').text('x'),
 				$columnAddCard = $('<button>').addClass('add-card').text('Dodaj kartę');
-
+					
 			// PODPINANIE ODPOWIEDNICH ZDARZEŃ
 			$columnDelete.click(function() {      
 				self.removeColumn();
 			});
 			$columnAddCard.click(function() {
-				self.addCard(new Card(prompt("Wpisz nazwę karty")));
+				var nameCard = prompt("Wpisz nazwę karty");
+				var card = new Card(nameCard);
+				if (nameCard === null ) {
+					return;
+				}
+				self.addCard(card);
 			});
 
 			// KONSTRUOWANIE KOLUMNY
@@ -53,7 +58,7 @@ $(function() {
 		removeColumn: function() {				//Metoda remove
 			this.$element.remove();
 		}
-	};
+	}
 
 //KLASA CARD
 	function Card(description) {
@@ -87,10 +92,10 @@ $(function() {
 		removeCard: function() {
 			this.$element.remove();
 		}
-	};
+	}
 
 	function initSortable() {
-		$('.column-container').sortable({
+		$('.column-card-list').sortable({
 			connectWith: '.column-card-list',
 			placeholder: '.card-placeholder'
 		}).disableSelection();
@@ -111,7 +116,11 @@ $(function() {
 		.click(function() {
 			var name = prompt('Wpisz nazwę kolumny');
 			var column = new Column(name);
+			if (name === null) {
+				return;
+			}			
 		board.addColumn(column);
+
 		});
 
 // TWORZENIE KOLUMN
